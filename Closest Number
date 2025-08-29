@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+int closestNumber(int a, int b, int x) {
+    double p = pow((double)a, (double)b);
+    
+    long long low = ((long long)(floor(p / x))) * x;
+    long long high = ((long long)(ceil(p / x))) * x;
+
+    double diffLow = fabs(p - low);
+    double diffHigh = fabs(high - p);
+
+    if (diffLow < diffHigh) return (int)low;
+    else if (diffLow > diffHigh) return (int)high;
+    else return (int)((low < high) ? low : high);
+}
+
+int main() {
+    int T;
+    scanf("%d", &T);
+    while (T--) {
+        int a, b, x;
+        scanf("%d %d %d", &a, &b, &x);
+        printf("%d\n", closestNumber(a, b, x));
+    }
+    return 0;
+}
