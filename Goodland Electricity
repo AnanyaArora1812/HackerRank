@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int pylons(int n, int k, int arr[]) {
+    int plants = 0;
+    int pos = 0;
+    while (pos < n) {
+        int best = -1;
+        for (int i = (pos + k - 1 < n ? pos + k - 1 : n - 1); i >= pos - k + 1 && i >= 0; i--) {
+            if (arr[i] == 1) {
+                best = i;
+                break;
+            }
+        }
+        if (best == -1) return -1;
+        plants++;
+        pos = best + k;
+    }
+    return plants;
+}
+
+int main() {
+    int n, k;
+    scanf("%d %d", &n, &k);
+    int arr[n];
+    for (int i = 0; i < n; i++) scanf("%d", &arr[i]);
+    printf("%d\n", pylons(n, k, arr));
+    return 0;
+}
